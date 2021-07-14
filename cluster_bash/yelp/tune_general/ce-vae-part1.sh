@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+module load python/3.6
 source ~/cevae/bin/activate
 cd /home/tinashen/projects/def-ssanner/tinashen/DeepCritiquingForVAEBasedRecSys
 
