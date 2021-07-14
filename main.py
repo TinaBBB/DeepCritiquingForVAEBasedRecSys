@@ -9,13 +9,15 @@ from utils.progress import inhour, WorkSplitter
 
 import argparse
 import tensorflow.compat.v1 as tf
-
 tf.disable_eager_execution()
 
 import time
+import os
 
 
 def main(args):
+    os.environ['KMP_DUPLICATE_LIB_OK'] = 'True'
+
     # Progress bar
     progress = WorkSplitter()
 

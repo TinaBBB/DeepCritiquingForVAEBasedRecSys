@@ -55,7 +55,7 @@ class CE_VAE(object):
 
             with tf.variable_scope('encoder'):
                 encoded = tf.layers.dense(inputs=wc, units=self._latent_dim*2,
-                                          kernel_regularizer=tf.contrib.layers.l2_regularizer(scale=self._lamb_l2),
+                                          kernel_regularizer=tf.keras.regularizers.l2(self._lamb_l2),
                                           activation=None, name="Encoder_Weights")
 
             with tf.variable_scope('latent'):
@@ -71,11 +71,11 @@ class CE_VAE(object):
 
             with tf.variable_scope("prediction", reuse=False):
                 rating_prediction = tf.layers.dense(inputs=self.z, units=self._observation_dim,
-                                                    kernel_regularizer=tf.contrib.layers.l2_regularizer(scale=self._lamb_l2),
+                                                    kernel_regularizer=tf.keras.regularizers.l2(self._lamb_l2),
                                                     activation=None, name='rating_prediction')
 
                 keyphrase_prediction = tf.layers.dense(inputs=self.z, units=self._keyphrase_dim,
-                                                       kernel_regularizer=tf.contrib.layers.l2_regularizer(scale=self._lamb_l2),
+                                                       kernel_regularizer=tf.keras.regularizers.l2(self._lamb_l2),
                                                        activation=None, name='keyphrase_prediction')
 
                 self.rating_prediction = rating_prediction
@@ -84,7 +84,7 @@ class CE_VAE(object):
             # looping with keyphrase
             with tf.variable_scope("looping"):
                 reconstructed_latent = tf.layers.dense(inputs=self.keyphrase_prediction, units=self._latent_dim*2,
-                                                       kernel_regularizer=tf.contrib.layers.l2_regularizer(scale=self._lamb_l2),
+                                                       kernel_regularizer=tf.keras.regularizers.l2(self._lamb_l2),
                                                        activation=None, name='latent_reconstruction', reuse=False)
 
                 modified_latent = tf.layers.dense(inputs=self.modified_keyphrase, units=self._latent_dim*2,

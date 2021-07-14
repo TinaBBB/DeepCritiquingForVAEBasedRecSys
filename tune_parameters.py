@@ -14,6 +14,8 @@ def main(args):
     R_valid = load_numpy(path=args.data_dir, name=args.valid_set)
     R_train_keyphrase = load_numpy(path=args.data_dir, name=args.train_keyphrase_set)
     R_valid_keyphrase = load_numpy(path=args.data_dir, name=args.valid_keyphrase_set)
+
+    # binarized
     R_train_keyphrase[R_train_keyphrase != 0] = 1
     R_valid_keyphrase[R_valid_keyphrase != 0] = 1
 

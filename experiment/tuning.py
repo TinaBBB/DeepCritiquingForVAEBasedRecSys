@@ -89,23 +89,26 @@ def hyper_parameter_tuning(train, validation, keyphrase_train, keyphrase_validat
 
                                                 progress.subsection("Evaluation")
 
-                                                if tune_explanation:
-                                                    prediction = predict_keyphrase(keyphrase_score,
-                                                                                   topK=params['topK'][-1])
+                                                # get explanation results
+                                                # if tune_explanation:
+                                                uk_prediction = predict_keyphrase(keyphrase_score,
+                                                                                  topK=params['topK'][-1])
 
-                                                    result = evaluate(prediction,
-                                                                      keyphrase_validation,
-                                                                      params['metric'],
-                                                                      params['topK'])
-                                                else:
-                                                    prediction = predict(rating_score,
-                                                                         topK=params['topK'][-1],
-                                                                         matrix_Train=train)
+                                                uk_result = evaluate(uk_prediction,
+                                                                  keyphrase_validation,
+                                                                  params['metric'],
+                                                                  params['topK'])
 
-                                                    result = evaluate(prediction,
-                                                                      validation,
-                                                                      params['metric'],
-                                                                      params['topK'])
+                                                # get rating prediction results
+                                                # else:
+                                                ui_prediction = predict(rating_score,
+                                                                     topK=params['topK'][-1],
+                                                                     matrix_Train=train)
+
+                                                ui_result = evaluate(ui_prediction,
+                                                                  validation,
+                                                                  params['metric'],
+                                                                  params['topK'])
 
                                                 result_dict = {'model': algorithm,
                                                                'rank': rank,
@@ -119,9 +122,13 @@ def hyper_parameter_tuning(train, validation, keyphrase_train, keyphrase_validat
                                                                'corruption': corruption,
                                                                'optimizer': optimizer}
 
-                                                for name in result.keys():
-                                                    result_dict[name] = [round(result[name][0], 4),
-                                                                         round(result[name][1], 4)]
+                                                for name in ui_result.keys():
+                                                    result_dict[name] = [round(ui_result[name][0], 4),
+                                                                         round(ui_result[name][1], 4)]
+
+                                                for name in uk_result.keys():
+                                                    result_dict['uk_' + name] = [round(uk_result[name][0], 4),
+                                                                                 round(uk_result[name][1], 4)]
 
                                                 df = df.append(result_dict, ignore_index=True)
 
