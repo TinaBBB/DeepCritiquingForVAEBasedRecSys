@@ -4,7 +4,8 @@ from utils.modelnames import critiquing_models
 from utils.progress import WorkSplitter
 
 import pandas as pd
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
+tf.disable_eager_execution()
 
 
 def critiquing(train_set, keyphrase_train_set, item_keyphrase_train_set, params, num_users_sampled, load_path, save_path, critiquing_function):

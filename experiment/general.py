@@ -5,7 +5,8 @@ from utils.modelnames import models
 from utils.progress import WorkSplitter
 
 import pandas as pd
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
+tf.disable_eager_execution()
 
 
 def general(train, test, keyphrase_train, keyphrase_test, params, save_path, final_explanation=False):

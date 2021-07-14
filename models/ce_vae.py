@@ -2,9 +2,9 @@ from scipy.sparse import vstack
 from tqdm import tqdm
 from utils.progress import WorkSplitter
 from utils.optimizers import Optimizer
-
 import numpy as np
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
+tf.disable_eager_execution()
 
 
 class CE_VAE(object):

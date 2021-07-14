@@ -8,8 +8,10 @@ from utils.modelnames import models
 from utils.progress import inhour, WorkSplitter
 
 import argparse
-import numpy as np
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
+
+tf.disable_eager_execution()
+
 import time
 
 

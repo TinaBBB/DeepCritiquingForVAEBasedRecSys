@@ -1,9 +1,9 @@
-import tensorflow as tf
-
+import tensorflow.compat.v1 as tf
+tf.disable_eager_execution()
+from tensorflow.compat.v1.train import AdamOptimizer, RMSPropOptimizer, GradientDescentOptimizer
 
 Optimizer = {
-    "Adam": tf.train.AdamOptimizer,
-    "RMSProp": tf.train.RMSPropOptimizer,
-    "SGD": tf.train.GradientDescentOptimizer,
-    #"Momentum": tf.train.MomentumOptimizer,
+    "Adam": AdamOptimizer, # tf.train.AdamOptimizer
+    "RMSProp": RMSPropOptimizer,
+    "SGD": GradientDescentOptimizer,
 }
