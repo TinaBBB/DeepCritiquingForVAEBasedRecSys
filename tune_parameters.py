@@ -3,10 +3,10 @@ from utils.io import load_numpy, load_yaml
 from utils.modelnames import models
 
 import argparse
-import os
+# import os
 
 def main(args):
-    os.environ['KMP_DUPLICATE_LIB_OK'] = 'True'
+    # os.environ['KMP_DUPLICATE_LIB_OK'] = 'True'
     params = load_yaml(args.parameters)
 
     params['models'] = {params['models']: models[params['models']]}
