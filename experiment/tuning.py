@@ -1,4 +1,4 @@
-from evaluation.general_performance import evaluate
+from evaluation.general_performance import evaluate, evaluate_explanation
 from prediction.predictor import predict, predict_keyphrase
 from utils.io import load_dataframe_csv, save_dataframe_csv, load_yaml
 from utils.modelnames import models
@@ -94,7 +94,8 @@ def hyper_parameter_tuning(train, validation, keyphrase_train, keyphrase_validat
                                                 uk_prediction = predict_keyphrase(keyphrase_score,
                                                                                   topK=params['topK'][-1])
 
-                                                uk_result = evaluate(uk_prediction,
+                                                # The evaluation does not have NDCG@K over here
+                                                uk_result = evaluate_explanation(uk_prediction,
                                                                   keyphrase_validation,
                                                                   params['metric'],
                                                                   params['topK'])
