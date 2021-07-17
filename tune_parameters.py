@@ -19,13 +19,14 @@ def main(args):
     R_test_keyphrase = load_numpy(path=args.data_dir, name=args.test_keyphrase_set)
 
     # binarized
-    R_train_keyphrase[R_train_keyphrase != 0] = 1
-    R_valid_keyphrase[R_valid_keyphrase != 0] = 1
+    R_trainvalid_keyphrase = R_train_keyphrase + R_valid_keyphrase
+    R_trainvalid_keyphrase[R_trainvalid_keyphrase != 0] = 1
+    # R_valid_keyphrase[R_valid_keyphrase != 0] = 1
     R_test_keyphrase[R_test_keyphrase != 0] = 1
 
     hyper_parameter_tuning(R_train + R_valid,
                            R_test,
-                           (R_train_keyphrase+R_valid_keyphrase).todense(),
+                           (R_trainvalid_keyphrase).todense(),
                            R_test_keyphrase,
                            params,
                            save_path=args.save_path,
