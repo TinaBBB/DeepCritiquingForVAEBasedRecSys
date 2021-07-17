@@ -94,7 +94,6 @@ def hyper_parameter_tuning(train, validation, keyphrase_train, keyphrase_validat
                                                 uk_prediction = predict_keyphrase(keyphrase_score,
                                                                                   topK=params['topK'][-1])
 
-                                                # The evaluation does not have NDCG@K over here
                                                 uk_result = evaluate_explanation(uk_prediction,
                                                                   keyphrase_validation,
                                                                   params['metric'],
